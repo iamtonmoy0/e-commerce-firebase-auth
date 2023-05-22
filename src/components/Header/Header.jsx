@@ -3,10 +3,11 @@ import './Header.css';
 import logo from '../../images/Logo.svg';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
+import { Navigate } from 'react-router-dom';
 
 const Header = () => {
     const [message,setMessage]=useState('')
-    const {logOut}=useContext(AuthContext)
+    const {logOut,user}=useContext(AuthContext)
     const handleLogOut=()=>{
         logOut()
         .then(()=>{
@@ -23,9 +24,19 @@ const Header = () => {
                 <Link to="/">Shop</Link>
                 <Link to="/orders">Orders</Link>
                 <Link to="/inventory">Inventory</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-                <button type='submit' onClick={handleLogOut}>Logout</button>
+             
+                {
+                    user ? <Link style={{display:'flex',flexDirection:'row',}}>
+                     
+                    <p>{user.email}</p>
+                    <button type='submit' onClick={handleLogOut}>Logout</button>
+                    </Link> : 
+                    <>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Sign Up</Link>
+                    </>
+                }
+                
             </div>
         </nav>
     );
