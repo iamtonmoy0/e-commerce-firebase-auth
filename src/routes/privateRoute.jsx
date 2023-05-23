@@ -7,7 +7,7 @@ const PrivateRoute = ({children}) => {
 
 	  //figure out current location and previous location
 	  const location=useLocation()
-      		console.log(location)
+      		
 
 	const{user,loader}=useContext(AuthContext)
 	if(loader){
