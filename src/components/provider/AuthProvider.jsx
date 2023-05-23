@@ -10,11 +10,13 @@ const AuthProvider = ({children}) => {
 
 	// creating user  with mail
 	const createUser=(mail,pass)=>{
+		setLoader(true)
 		return createUserWithEmailAndPassword(auth,mail,pass);
 
 	}
 	 //log in
 	 const signIn = (mail, pass) => {
+		setLoader(true)
          return signInWithEmailAndPassword(auth, mail, pass);
          }
 	 //log out

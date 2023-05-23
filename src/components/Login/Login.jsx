@@ -1,13 +1,16 @@
 import React, { useContext, useState } from 'react';
 import './Login.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Login = () => {
     const {signIn}=useContext(AuthContext);
     const [error,setError]=useState('')
-  const navigate=useNavigate()
-
+     const navigate=useNavigate();
+     const location =useLocation()
+     //if location exist in path name it will redirect
+     const from=location.state?.from?.pathname || '/';
+   
     const handleLogin=(e)=>{
         e.preventDefault();
         const form=e.target;
@@ -18,7 +21,7 @@ const Login = () => {
         .then(()=>{
             form.reset()
             setError('sign in successful')
-            navigate('/')
+            navigate(from)
         })
         .catch(error=>{
             setError(error.message)
